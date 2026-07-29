@@ -19,8 +19,9 @@ MonoBehaviour:
   allowedZones: 0100000000000000
   extend: 0
   clickable: 1
-  roomName: Empty
-  description: 
+  roomName: "\uBE48 \uBC29"
+  description: "\uC544\uC9C1 \uC784\uCC28\uC778\uC774 \uC5C6\uB294 \uBE48 \uBC29\uC785\uB2C8\uB2E4.\n'\uC784\uCC28\uC778
+    \uCC3E\uAE30'\uB85C \uC785\uC810\uC2DC\uCF1C \uBCF4\uC138\uC694."
   dailyRent: 0
   buildCost: 0
   buildSeconds: 10

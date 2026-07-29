@@ -59,6 +59,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - ModuleData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3d8e448bda8eb934180455473dde9019
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Commercial_Book_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3db1f7f8b3f306840b8fd55a324e3880
     m_Address: Assets/Application/TopTower/Image/Module/StageCommon/System_Empty_001.png
     m_ReadOnly: 0
@@ -118,6 +124,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 840dfc0a58dffd94c9500ac53aaaf660
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Commercial_Book.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8e51e23cdbabf0c41986ddecdfd7236d
     m_Address: Assets/Application/TopTower/Font/malgunbd.ttf

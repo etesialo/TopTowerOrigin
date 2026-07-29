@@ -22,6 +22,6 @@ MonoBehaviour:
   roomName: "\uC11C\uC810"
   description: "\uCC45\uC744 \uD30C\uB294 \uC0C1\uC810."
   dailyRent: 4
-  buildCost: 40
-  buildSeconds: 10
-  sprite: {fileID: 0}
+  buildCost: 10
+  buildSeconds: 3
+  sprite: {fileID: 21300000, guid: 3d8e448bda8eb934180455473dde9019, type: 3}

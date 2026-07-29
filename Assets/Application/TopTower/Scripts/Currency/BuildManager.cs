@@ -67,7 +67,7 @@ namespace KS.TopTower
             var bv = Object.FindObjectOfType<BuildingView>();
             if (bv != null)
             {
-                bv.RenderBuilding();
+                bv.RefreshFloorModule(floorIndex);   // 해당 층만 갱신 (전체 재렌더 X → 깜빡임 없음)
                 bv.ScrollToFloor(floorIndex);
             }
             return true;
@@ -87,9 +87,12 @@ namespace KS.TopTower
             }
             if (finished != null)
             {
-                foreach (var f in finished) _slots[f].status = SlotStatus.Built;
                 var bv = Object.FindObjectOfType<BuildingView>();
-                if (bv != null) bv.RenderBuilding();
+                foreach (var f in finished)
+                {
+                    _slots[f].status = SlotStatus.Built;
+                    if (bv != null) bv.RefreshFloorModule(f);   // 완료된 층만 갱신
+                }
             }
         }
     }
