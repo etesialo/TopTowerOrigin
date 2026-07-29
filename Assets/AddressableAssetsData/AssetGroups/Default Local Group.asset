@@ -71,6 +71,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - StageCommon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 492a62d69cab4585ba12b70891fdaafd
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Restaurant_Donburi.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 540797779d4b0ca4e82cdc810c12f686
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Structural_Bottomfr_001.png
     m_ReadOnly: 0
@@ -161,6 +167,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f5e5e8bf3205ec44a79f53ce30d31f4
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Donburi_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a50b83e34e37cab4a8a61922b34fd015
     m_Address: Assets/Application/TopTower/Image/Module/StageCommon/System_Empty_003.png
     m_ReadOnly: 0
@@ -233,6 +245,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - ModuleData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da792cece0524676bb521c2f613d37eb
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Restaurant_Ramen.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e0f8c48e5c3ae354ab32b6921db11093
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_System_Elevator_001.png
     m_ReadOnly: 0
@@ -262,6 +280,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - StageData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcdbe0c8c93f683489aa0d61deae014f
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Ramen_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8d0b16fc2379219449546631d6c21bf0, type: 2}

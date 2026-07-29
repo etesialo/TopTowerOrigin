@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e816df7b332fda7488de9e7783f68513, type: 3}
+  m_Name: MD_Restaurant_Ramen
+  m_EditorClassIdentifier:
+  group: 2
+  moduleName: Ramen
+  cube: 0
+  frame: 2
+  allowedZones: 0100000000000000
+  extend: 0
+  clickable: 1
+  roomName: "라멘집"
+  description: "뜨끈한 라멘을 파는 식당."
+  dailyRent: 5
+  buildCost: 10
+  buildSeconds: 3
+  sprite: {fileID: 21300000, guid: fcdbe0c8c93f683489aa0d61deae014f, type: 3}
