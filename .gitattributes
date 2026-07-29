@@ -1,0 +1,29 @@
+# 기본: 텍스트 자동 판별 + 줄바꿈 정규화
+* text=auto
+
+# ── Unity YAML (텍스트, 병합 가능) ──
+*.meta     text
+*.unity    text
+*.prefab   text
+*.asset    text
+*.mat      text
+*.anim     text
+*.controller text
+*.physicMaterial text
+*.cs       text diff=csharp
+
+# ── 바이너리 (줄바꿈 변환 금지) ──
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.psd  binary
+*.tga  binary
+*.ttf  binary
+*.otf  binary
+*.fbx  binary
+*.wav  binary
+*.mp3  binary
+*.ogg  binary
+*.dll  binary
+*.unitypackage binary

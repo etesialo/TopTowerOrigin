@@ -1,0 +1,10 @@
+- [프로젝트 배경](project_context.md) — 새 게임 "Top Tower" 개발 (패키지 com.kyeongsoo.toptower). 회사 빈 껍데기(newbon_group3) 베이스, 기존 구조 자유롭게 변경 가능.
+- [게임 컨셉](game_concept.md) — 타워 방치형(SimTower/TinyTower 계열), 9:16 세로, 단면도 비주얼, 5칸 가로 그리드, 지상/지하 구분, 세입자(자동 납부)/방문객(골드 드롭) 메커닉.
+- [user_preferences.md](user_preferences.md) — 한국어 답변, 자동 수행 선호, 이모지 금지
+- [feedback_git.md](feedback_git.md) — git 작업은 사용자가 직접 관리, 클로드는 커밋 권유/실행 금지
+- [feedback_reuse_pattern.md](feedback_reuse_pattern.md) — 작동하는 코드 패턴 재사용, 다른 방식 시도 금지
+- [feedback_shared_logic.md](feedback_shared_logic.md) — 동일 로직 중복 금지, 공용 함수 하나로 관리
+- [feedback_problem_solving.md](feedback_problem_solving.md) — 문제 제시 시 즉각 수정 금지, 원인분석→방안모색→허가→수정
+- [Docs 폴더 자동 참조](reference_docs_folder.md) — 프로젝트 루트 Docs/ 에 게임 데이터/용어 마스터. 모듈/그룹/존 관련 작업 전 반드시 확인.
+- [Unity Editor.log 자동 참조](reference_unity_editor_log.md) — 콘솔 에러/로그 필요 시 사용자 캡처 없이도 자동으로 Editor.log 읽기. 경로 + 명령어 정리됨.
+- [디버깅 자동 워크플로우](feedback_debug_workflow.md) — 문제 발생 시 5단계 자동 처리: 디버그 로그 추가 → Play 요청 → Editor.log 자동 읽기 → 솔루션 보고 → 해결 후 디버그 로그 정리(필수).

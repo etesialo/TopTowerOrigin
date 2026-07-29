@@ -1,0 +1,259 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 3e19f82f6783d1f49a257228b3bdbc9b
+  m_SerializeEntries:
+  - m_GUID: 0c9d59b9b3998834ab798c9eb0ec4d07
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Structural_Gate_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0f7b18246be76fd48a45870b309d9b7a
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Structural_Floor_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16e1f9ac189aa4d43840048517a5f253
+    m_Address: Assets/Application/TopTower/Image/Module/StageCommon/System_Empty_002.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - StageCommon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23cb5b31f5fe1934784ff44405ec12a5
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Structural_Underwallfr.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25593e3ee9574e247817441f0d2fbc4d
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Structural_Wall_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ac483e02a8186942a634daa017fdc81
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Structural_Root.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fd58c8f2bbea3b459446efbe6753add
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Structural_Bottomfr.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3db1f7f8b3f306840b8fd55a324e3880
+    m_Address: Assets/Application/TopTower/Image/Module/StageCommon/System_Empty_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - StageCommon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 540797779d4b0ca4e82cdc810c12f686
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Structural_Bottomfr_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c2659321eda9e14a8364e78dfa1480e
+    m_Address: Assets/Application/TopTower/StageData/Stage_001.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - StageData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5e4f49361e77418428c78d3f73082add
+    m_Address: Assets/Application/TopTower/Image/Background/001_Background_Underground_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Background
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 66a87ca659a618a4ab4d9de3da26b552
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Restaurant_Sushi.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67ff8b31858725943a5b7c90a6ceafdb
+    m_Address: Assets/Application/TopTower/Image/UI/IMG_HomeIcon_Bottom.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6862fe0238d10c24d96226b64c02d014
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Structural_Gate.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e90a2f75c9e05242867a9f77b9f8d68
+    m_Address: Assets/Application/TopTower/Image/Module/StageCommon/System_Empty_004.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - StageCommon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73b2be845e0ba104cbf9f97d257c4db7
+    m_Address: Assets/Application/TopTower/Font/NotoSans-Bold.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Font
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a1020149685a7a48ae84ad39fdda776
+    m_Address: Assets/Application/TopTower/Image/UI/IMG_GradientTop.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e51e23cdbabf0c41986ddecdfd7236d
+    m_Address: Assets/Application/TopTower/Font/malgunbd.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Font
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 93e4b2113424fa44a85c424588ea3578
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Sushi_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 94c171448e68da34197a06cc6f04bd57
+    m_Address: Assets/Application/TopTower/StagePrefab/Stage_001.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - StagePrefab
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a9b829ac3b14e04ca246b483e5c374b
+    m_Address: Assets/Application/TopTower/Font/NotoSans-Black.ttf
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Font
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9cf4d873a47869a41bcdd7a51e5026e0
+    m_Address: Assets/Application/TopTower/Image/UI/IMG_GradientBottom.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a50b83e34e37cab4a8a61922b34fd015
+    m_Address: Assets/Application/TopTower/Image/Module/StageCommon/System_Empty_003.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - StageCommon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5ee59784606eae4c975fdec4ca6bf40
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Structural_Underwall_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa6ff7afeb55a9848915be3525b55f78
+    m_Address: Assets/Application/TopTower/Image/Background/001_Background_Main_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Background
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3f4ea9ec3ee6604598c7b052157bc82
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Structural_Wallfr.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4c5de771cc9989468c64e9f67469a21
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Structural_Underwall.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b59242c0b6ab2194f8bc277a325b143f
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Structural_Bottom_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b66a0946f94b81e4d9a03d3e68d4499b
+    m_Address: Assets/Application/TopTower/ModuleData/MD_System_Empty.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b85756a7cab642a4e8b6a0e313441795
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Structural_Floor.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b911ca4b6b1da464b88028f4b31dab4d
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Structural_Underwallfr_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4a2dc61b85685440b4d48ae700d19f4
+    m_Address: Assets/Application/TopTower/Font/MalgunGothicBold SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Font
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6e50b16b170b254f847e301213bb8b3
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Structural_Wallfr_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d73e40fa52749024a88f8a59b4be0bf6
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Structural_Bottom.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0f8c48e5c3ae354ab32b6921db11093
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_System_Elevator_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1b3409a7f3f1b84bbbc17bc76065a0f
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Structural_Root_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ecd3c408ed13a3745b381d2c33a5675e
+    m_Address: Assets/Application/TopTower/ModuleData/MD_System_Elevator.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f26d5d316259acd48addd7a57804436e
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Structural_Wall.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f640fd09f62b944489fdfc5ee9900e28
+    m_Address: Assets/Application/TopTower/StageData/Stage_002.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - StageData
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 8d0b16fc2379219449546631d6c21bf0, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 07a83a8d3a92b1f41a642e800eebdb2e, type: 2}
+    - {fileID: 11400000, guid: b90c1a71aa9bdea40bc707f7614abf74, type: 2}
