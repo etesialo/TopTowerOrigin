@@ -19,7 +19,7 @@ MonoBehaviour:
   allowedZones: 01000000
   extend: 0
   clickable: 1
-  roomName: "\uC628\uCC9C '\uC720\uB178\uD558\uB098(\u6E6F\u306E\u82B1)'"
+  roomName: "\uC2E4\uB0B4\uC628\uCC9C '\uC720\uB178\uD558\uB098'"
   description: "\uAE40\uC774 \uBAA8\uB77D\uBAA8\uB77D \uD53C\uC5B4\uC624\uB974\uB294
     \uC77C\uBCF8\uC2DD \uC628\uCC9C\uD0D5."
   dailyRent: 5

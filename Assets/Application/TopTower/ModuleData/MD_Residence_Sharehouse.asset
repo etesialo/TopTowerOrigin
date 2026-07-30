@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e816df7b332fda7488de9e7783f68513, type: 3}
+  m_Name: MD_Residence_Sharehouse
+  m_EditorClassIdentifier: 
+  group: 5
+  moduleName: Sharehouse
+  cube: 0
+  frame: 2
+  allowedZones: 01000000
+  extend: 0
+  clickable: 1
+  roomName: "\uC170\uC5B4\uD558\uC6B0\uC2A4 '\uC544\uC624\uC870\uB77C(\u9752\u7A7A)'"
+  description: "\uC80A\uC740\uC774\uB4E4\uC774 \uD568\uAED8 \uC5B4\uC6B8\uB824 \uC0AC\uB294
+    \uB3C4\uCFC4\uC758 \uC170\uC5B4\uD558\uC6B0\uC2A4."
+  dailyRent: 5
+  buildCost: 10
+  buildSeconds: 3
+  sprite: {fileID: 21300000, guid: 19ae1c603597dff43a9863268aa19785, type: 3}

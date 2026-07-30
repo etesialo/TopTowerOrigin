@@ -76,6 +76,20 @@ namespace KS.TopTower
         }
 
         /// <summary>
+        /// BackgroundGroup RT를 x만큼 시프트 (BuildingView.SetShiftX와 동기화 — 한 몸 이동).
+        /// 가로 드래그(복귀형)에서 호출. y는 건드리지 않음.
+        /// </summary>
+        public void SetShiftX(float shift)
+        {
+            if (_mainImage == null) return;
+            var bgGroup = _mainImage.rectTransform.parent as RectTransform;
+            if (bgGroup == null) return;
+            var pos = bgGroup.anchoredPosition;
+            pos.x = shift;
+            bgGroup.anchoredPosition = pos;
+        }
+
+        /// <summary>
         /// BackgroundGroup 전체 localScale 설정 (빌딩 줌과 동기화 — 한 몸 확대/축소).
         /// </summary>
         public void SetZoom(float zoom)

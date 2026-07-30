@@ -377,6 +377,25 @@ namespace KS.TopTower
             if (_backgroundView != null) _backgroundView.SetShiftY(shift);
         }
 
+        /// <summary>
+        /// 빌딩 가로 시프트(복귀형 드래그 전용). cubeContainer.anchoredPosition.x만 변경.
+        /// 손 떼면 컨트롤러가 홈 x로 되돌린다. y는 건드리지 않음.
+        /// </summary>
+        public float ShiftX => _cubeContainer != null ? _cubeContainer.anchoredPosition.x : 0f;
+
+        public void SetShiftX(float shift)
+        {
+            if (_cubeContainer == null) return;
+            var pos = _cubeContainer.anchoredPosition;
+            pos.x = shift;
+            _cubeContainer.anchoredPosition = pos;
+
+            // 배경도 같이 시프트 (빌딩과 한 몸)
+            if (_backgroundView == null) _backgroundView = GetComponentInParent<BackgroundView>();
+            if (_backgroundView == null) _backgroundView = transform.root.GetComponentInChildren<BackgroundView>();
+            if (_backgroundView != null) _backgroundView.SetShiftX(shift);
+        }
+
         /// <summary>해당 층 큐브가 화면(뷰포트) 중앙에 오도록 스크롤 (카메라 이동). 건설 시작 시 호출.</summary>
         public void ScrollToFloor(int floorIndex)
         {

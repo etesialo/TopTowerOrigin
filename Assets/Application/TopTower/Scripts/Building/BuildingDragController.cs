@@ -7,6 +7,7 @@ namespace KS.TopTower
     /// <summary>
     /// 빌딩 입력 컨트롤러:
     ///   - 세로 드래그(1손가락/마우스) → 스크롤. 한계 시 고무줄 효과.
+    ///   - 가로 드래그 → 드래그 동안만 옆으로 밈(복귀형). 손 떼면 정해진 홈 x로 되돌아감.
     ///   - 마우스 휠 → 줌 인/아웃 (화면 중앙 고정).
     ///   - 두 손가락 핀치 → 줌 인/아웃 (모바일).
     /// StageViewport (Stage_001.prefab)에 자동 부착 — raycast 받기 위해 같은 GameObject에 투명 Image 필요.
@@ -30,9 +31,17 @@ namespace KS.TopTower
         [Tooltip("한계 초과 후 손 떼면 자동 복귀 시간 (초)")]
         [SerializeField] private float _reboundDuration = 0.25f;
 
+        [Header("가로 드래그 (복귀형)")]
+        [Tooltip("가로로 밀 수 있는 최대 거리(px). 이 범위를 넘으면 고무줄 저항. 손 떼면 홈 x로 복귀.")]
+        [SerializeField] private float _maxHorizontalPeek = 400f;
+
         private bool _isDragging;
         private RectTransform _viewportRt;
         private float _previousPinchDistance;
+
+        // 가로 복귀 목표(정해진 x). 최초 드래그 시 현재 x를 캡처.
+        private float _homeX;
+        private bool _homeXCaptured;
 
         private void Awake()
         {
@@ -94,6 +103,11 @@ namespace KS.TopTower
         public void OnBeginDrag(PointerEventData eventData)
         {
             _isDragging = true;
+            if (!_homeXCaptured && _buildingView != null)
+            {
+                _homeX = _buildingView.ShiftX;   // 정해진 x = 시작 시점의 x
+                _homeXCaptured = true;
+            }
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -101,12 +115,12 @@ namespace KS.TopTower
             if (_buildingView == null) return;
             if (Input.touchCount >= 2) return; // 핀치 중엔 드래그 무시
 
+            // 세로: 한계 + 고무줄 (유지)
             float deltaY = eventData.delta.y;
             float currentShift = _buildingView.ShiftY;
             (float minShift, float maxShift) = CalculateLimits();
 
             float newShift = currentShift + deltaY;
-            // 한계 초과 시 고무줄 감쇠
             if (newShift > maxShift)
             {
                 float over = newShift - maxShift;
@@ -118,37 +132,61 @@ namespace KS.TopTower
                 newShift = minShift - over * _rubberBandResistance;
             }
             _buildingView.SetShiftY(newShift);
+
+            // 가로: 홈 x 기준 ±_maxHorizontalPeek 범위 내에서만 따라오고, 넘으면 고무줄 (손 떼면 복귀)
+            float deltaX = eventData.delta.x;
+            float newX = _buildingView.ShiftX + deltaX;
+            float maxX = _homeX + _maxHorizontalPeek;
+            float minX = _homeX - _maxHorizontalPeek;
+            if (newX > maxX)
+            {
+                float over = newX - maxX;
+                newX = maxX + over * _rubberBandResistance;
+            }
+            else if (newX < minX)
+            {
+                float over = minX - newX;
+                newX = minX - over * _rubberBandResistance;
+            }
+            _buildingView.SetShiftX(newX);
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
             _isDragging = false;
-            ReboundIfOutOfLimitsAsync().Forget();
+            ReboundAsync().Forget();
         }
 
         /// <summary>
-        /// 한계 초과 상태면 한계 안으로 부드럽게 복귀.
+        /// 손 뗀 뒤 부드럽게 복귀:
+        ///  - 세로: 한계 초과분만 한계 안으로.
+        ///  - 가로: 항상 홈 x로 (드래그 동안만 옆으로 밀리는 복귀형).
         /// </summary>
-        private async UniTask ReboundIfOutOfLimitsAsync()
+        private async UniTask ReboundAsync()
         {
             if (_buildingView == null) return;
             (float minShift, float maxShift) = CalculateLimits();
-            float currentShift = _buildingView.ShiftY;
-            float targetShift = Mathf.Clamp(currentShift, minShift, maxShift);
-            if (Mathf.Approximately(currentShift, targetShift)) return;
+
+            float startY = _buildingView.ShiftY;
+            float targetY = Mathf.Clamp(startY, minShift, maxShift);
+            float startX = _buildingView.ShiftX;
+            float targetX = _homeX;
+
+            if (Mathf.Approximately(startY, targetY) && Mathf.Approximately(startX, targetX)) return;
 
             float elapsed = 0f;
-            float startShift = currentShift;
             while (elapsed < _reboundDuration)
             {
                 if (_isDragging) return; // 다시 드래그 시작하면 취소
                 elapsed += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsed / _reboundDuration);
                 float eased = 1f - Mathf.Pow(1f - t, 3f);
-                _buildingView.SetShiftY(Mathf.Lerp(startShift, targetShift, eased));
+                _buildingView.SetShiftY(Mathf.Lerp(startY, targetY, eased));
+                _buildingView.SetShiftX(Mathf.Lerp(startX, targetX, eased));
                 await UniTask.Yield(PlayerLoopTiming.Update);
             }
-            _buildingView.SetShiftY(targetShift);
+            _buildingView.SetShiftY(targetY);
+            _buildingView.SetShiftX(targetX);
         }
 
         /// <summary>
