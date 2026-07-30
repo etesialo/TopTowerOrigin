@@ -264,7 +264,8 @@ namespace KS.TopTower.EditorTools
             else EditorUtility.SetDirty(data);
             AssetDatabase.SaveAssets();
             _loadedAsset = data;
-            Debug.Log("[ModuleTypeTool] 저장: " + assetPath);
+            TopTowerAddressablesSyncTool.Sync();   // 저장 즉시 Addressables 동기화 → 런타임 자동 인식
+            Debug.Log("[ModuleTypeTool] 저장 + Sync 완료: " + assetPath);
         }
 
         private static void DrawSprite(Rect r, Sprite sp)
@@ -289,8 +290,11 @@ namespace KS.TopTower.EditorTools
             AssetDatabase.CreateFolder(parent, leaf);
         }
 
-        /// <summary>Structural/Facility 모듈에 기본 타입 속성을 미리 넣은 ModuleData를 일괄 생성.</summary>
-        [MenuItem("Tools/Top Tower/Generate Default ModuleData")]
+        /// <summary>
+        /// 모듈 갱신: 모든 모듈 스프라이트를 스캔해 ModuleData가 없는 새 모듈을 자동 생성 + Sync.
+        /// 기존 ModuleData는 건드리지 않음(스킵). 새 가게 이미지만 넣고 이걸 실행하면 됨.
+        /// </summary>
+        [MenuItem("Tools/Top Tower/Scan & Add Missing Modules")]
         public static void GenerateDefaults()
         {
             EnsureFolder(ModuleDataFolder);
@@ -301,7 +305,6 @@ namespace KS.TopTower.EditorTools
                 string path = AssetDatabase.GUIDToAssetPath(guid);
                 string file = Path.GetFileNameWithoutExtension(path);
                 if (!TryParse(file, out var g, out var name)) continue;
-                if (g != ModuleGroup.Structural && g != ModuleGroup.Facility && g != ModuleGroup.System) continue;
 
                 string key = g + "_" + name;
                 if (!seen.Add(key)) continue;                               // 스테이지 공통: 이름당 1개
@@ -314,12 +317,20 @@ namespace KS.TopTower.EditorTools
                 data.extend = d.extend; data.allowedZones = new List<Zone>(d.zones);
                 data.clickable = d.clickable;
                 data.roomName = name;   // 기본 방이름 = 모듈명 (툴에서 편집)
+                // 개발 중 통일값: 임대 업종(구조/시스템 제외)은 공사비/건설시간/임대료를 초밥집과 동일하게.
+                if (g != ModuleGroup.Structural && g != ModuleGroup.System)
+                {
+                    data.buildCost = 10;
+                    data.buildSeconds = 3f;
+                    data.dailyRent = 5;
+                }
                 data.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
                 AssetDatabase.CreateAsset(data, assetPath);
                 created++;
             }
             AssetDatabase.SaveAssets();
-            Debug.Log("[ModuleTypeTool] 기본 ModuleData 생성. 신규 " + created + " / 스킵(이미 있음) " + skipped);
+            TopTowerAddressablesSyncTool.Sync();   // 생성 즉시 Addressables 동기화
+            Debug.Log("[ModuleTypeTool] 모듈 갱신 완료 + Sync. 신규 생성 " + created + " / 스킵(이미 있음) " + skipped);
         }
     }
 

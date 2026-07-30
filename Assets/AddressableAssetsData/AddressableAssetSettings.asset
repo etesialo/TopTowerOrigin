@@ -96,6 +96,8 @@ MonoBehaviour:
     - StageData
     - StagePrefab
     - Font
+    - Etc
+    - bigger
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: bb1317cca6b2023439a2e94acf1fe931, type: 2}

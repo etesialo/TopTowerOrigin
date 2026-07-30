@@ -14,7 +14,7 @@ namespace KS.TopTower
         public int floorIndex;      // 이 모듈이 속한 층 (임차인 찾기/건설 대상)
 
         [Tooltip("팝업이 뜨기까지 눌러야 하는 시간(초).")]
-        [SerializeField] private float _holdSeconds = 0.7f;
+        [SerializeField] private float _holdSeconds = 0.4f;
 
         // 이 거리 이상 움직이면 드래그로 간주 → long-press 취소
         // 이 거리 이상 움직이면 드래그로 간주 → long-press 취소. 손 흔들림엔 관대하게(px).

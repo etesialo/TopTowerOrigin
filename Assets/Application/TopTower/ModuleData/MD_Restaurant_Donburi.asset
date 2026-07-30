@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e816df7b332fda7488de9e7783f68513, type: 3}
   m_Name: MD_Restaurant_Donburi
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   group: 2
   moduleName: Donburi
   cube: 0
@@ -19,8 +19,9 @@ MonoBehaviour:
   allowedZones: 0100000000000000
   extend: 0
   clickable: 1
-  roomName: "돈부리집"
-  description: "정성껏 만든 돈부리를 파는 식당."
+  roomName: "\uB3C8\uBD80\uB9AC\uC9D1 '\uB3C8\uC57C \uC694\uC2DC\uB178(\u4E3C\u5C4B
+    \u5409\u91CE)'"
+  description: "\uADDC\uB3D9\uACFC \uD150\uB3D9\uC744 \uB0B4\uB294 \uC815\uD1B5 \uB36E\uBC25\uC9D1."
   dailyRent: 5
   buildCost: 10
   buildSeconds: 3
