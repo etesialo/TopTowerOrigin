@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e816df7b332fda7488de9e7783f68513, type: 3}
+  m_Name: MD_Restaurant_Izakaya
+  m_EditorClassIdentifier: 
+  group: 2
+  moduleName: Izakaya
+  cube: 0
+  frame: 2
+  allowedZones: 01000000
+  extend: 0
+  clickable: 1
+  roomName: "\uC774\uC790\uCE74\uC57C '\uD1A0\uB9AC\uAD50\uC790'"
+  description: "\uD1F4\uADFC\uAE38\uC5D0 \uB4E4\uB974\uAE30 \uC88B\uC740 \uC77C\uBCF8\uC2DD
+    \uC120\uC220\uC9D1. \uB2E4\uC591\uD55C \uC548\uC8FC\uC640 \uC220\uC744 \uD568\uAED8
+    \uC990\uAE34\uB2E4."
+  dailyRent: 5
+  buildCost: 10
+  buildSeconds: 3
+  sprite: {fileID: 21300000, guid: ab5289e9df9bdf34f8e0711a57ef7f60, type: 3}

@@ -30,6 +30,7 @@ namespace KS.TopTower
         private int _floorIndex;
         private ModuleData _pending;
         private bool _tabsBuilt;
+        private ModuleGroup _lastGroup = ModuleGroup.Restaurant;
 
         private static TMP_FontAsset Font { get { return TMP_Settings.defaultFontAsset; } }
 
@@ -61,7 +62,7 @@ namespace KS.TopTower
             if (_panel != null) _panel.SetActive(true);
             if (_confirmPanel != null) _confirmPanel.SetActive(false);
             EnsureTabs();
-            ShowGroup(ModuleGroup.Restaurant);   // 기본 탭: 식당
+            ShowGroup(_lastGroup);   // 마지막으로 선택한 탭 유지
         }
 
         public void Close()   // X 버튼
@@ -87,6 +88,7 @@ namespace KS.TopTower
 
         private void ShowGroup(ModuleGroup g)
         {
+            _lastGroup = g;
             if (_listContent == null) return;
             EnsureVerticalLayout(_listContent);
             for (int i = _listContent.childCount - 1; i >= 0; i--)

@@ -171,14 +171,23 @@ namespace KS.TopTower.EditorTools
         private void DrawColumnHeader()
         {
             EditorGUILayout.BeginHorizontal();
-            // 좌측 라벨 자리 — 행 라벨과 동일한 폭의 빈 Label (Space 대신 Label로 정확한 정렬)
-            GUILayout.Label(string.Empty, GUILayout.Width(70), GUILayout.Height(18));
+            // 좌측 라벨 자리 — 행 라벨과 동일한 폭. GetRect로 예약해 GUIStyle margin 누적 오차 방지.
+            GUILayoutUtility.GetRect(70, 18, GUILayout.Width(70), GUILayout.Height(18));
 
-            var centerStyle = new GUIStyle(EditorStyles.boldLabel) { alignment = TextAnchor.MiddleCenter };
+            // 셀(DrawCube/DrawPaddingCell)과 동일하게 GetRect로 컬럼 폭을 예약해야
+            // 실제 그리드와 픽셀 단위로 정확히 정렬된다. GUILayout.Label은 스타일 margin이
+            // 컬럼마다 누적되어 오른쪽으로 갈수록 그리드와 어긋난다.
+            var centerStyle = new GUIStyle(EditorStyles.boldLabel)
+            {
+                alignment = TextAnchor.MiddleCenter,
+                padding = new RectOffset(0, 0, 0, 0),
+                margin = new RectOffset(0, 0, 0, 0),
+            };
             for (int dc = 0; dc < DisplayWidth; dc++)
             {
+                Rect rect = GUILayoutUtility.GetRect(CubeWidth, 18, GUILayout.Width(CubeWidth), GUILayout.Height(18));
                 string letter = ((char)('A' + dc)).ToString();
-                GUILayout.Label(letter, centerStyle, GUILayout.Width(CubeWidth), GUILayout.Height(18));
+                GUI.Label(rect, letter, centerStyle);
             }
             EditorGUILayout.EndHorizontal();
         }

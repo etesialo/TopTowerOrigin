@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e816df7b332fda7488de9e7783f68513, type: 3}
+  m_Name: MD_Commercial_Fude
+  m_EditorClassIdentifier: 
+  group: 3
+  moduleName: Fude
+  cube: 0
+  frame: 2
+  allowedZones: 01000000
+  extend: 0
+  clickable: 0
+  roomName: "\uC11C\uC608 \uAD50\uC2E4 '\uD0A4\uC640\uBBF8'"
+  description: "\uC77C\uBCF8 \uC804\uD1B5 \uC11C\uC608\uB97C \uBC30\uC6B0\uB294 \uAD50\uC2B5\uC18C."
+  dailyRent: 5
+  buildCost: 10
+  buildSeconds: 3
+  sprite: {fileID: 21300000, guid: 3fe10d4a958bdf1449e5ada75d304f72, type: 3}

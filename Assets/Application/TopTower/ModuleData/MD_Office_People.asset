@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e816df7b332fda7488de9e7783f68513, type: 3}
+  m_Name: MD_Office_People
+  m_EditorClassIdentifier: 
+  group: 4
+  moduleName: People
+  cube: 0
+  frame: 2
+  allowedZones: 01000000
+  extend: 0
+  clickable: 1
+  roomName: "\uC778\uC7AC\uD30C\uACAC\uD68C\uC0AC '\uC640\uCE74\uBC14\uC9C4\uC790\uC774'"
+  description: "\uB2E4\uC591\uD55C \uAE30\uC5C5\uC5D0 \uC6B0\uC218 \uC778\uC7AC\uB97C
+    \uC5F0\uACB0\uD574\uC8FC\uB294 \uC778\uC7AC\uD30C\uACAC\uD68C\uC0AC."
+  dailyRent: 5
+  buildCost: 10
+  buildSeconds: 3
+  sprite: {fileID: 21300000, guid: c09c15262381d934d8125ba2832c2ed6, type: 3}

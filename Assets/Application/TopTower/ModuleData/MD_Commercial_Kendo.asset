@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e816df7b332fda7488de9e7783f68513, type: 3}
+  m_Name: MD_Commercial_Kendo
+  m_EditorClassIdentifier: 
+  group: 3
+  moduleName: Kendo
+  cube: 0
+  frame: 2
+  allowedZones: 01000000
+  extend: 0
+  clickable: 1
+  roomName: "\uAC80\uB3C4 \uB3C4\uC7A5 '\uD6C4\uC9C0\uC640\uB77C \uCF04\uB3C4'"
+  description: "\uAC80\uB3C4\uB97C \uBC30\uC6B0\uB294 \uB3C4\uC7A5."
+  dailyRent: 5
+  buildCost: 10
+  buildSeconds: 3
+  sprite: {fileID: 21300000, guid: d3294ce83989de54ebda3b37452fa8db, type: 3}

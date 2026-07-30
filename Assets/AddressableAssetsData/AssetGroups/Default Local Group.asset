@@ -17,14 +17,32 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 3e19f82f6783d1f49a257228b3bdbc9b
   m_SerializeEntries:
+  - m_GUID: 007499d332cc51e4095f0f0e7adabca3
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Residence_Mension.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 014f7f0fbe9074c4892747945ea70d4e
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Commercial_Convenience_001.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - bigger
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 02b8298e67d72d7428df9c7e353b72ce
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Restaurant_Izakaya_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 070969515d38dee419cdd31d2aaf9460
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Commercial_Figure_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07dabf77c077a3e41aa9c4c10a12fa60
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Residence_Ryokan_001.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage_001
@@ -47,11 +65,29 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage_001
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 105b8778802de7949956dfaf823126ca
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Takoyaki_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1183d05484e2dd441955fc00eef99d8d
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Curry_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 16e1f9ac189aa4d43840048517a5f253
     m_Address: Assets/Application/TopTower/Image/Module/StageCommon/System_Empty_002.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - StageCommon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18868e7800ac590428c440f0cb8de3e5
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Residence_Ryokan_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 18af4ac8164528a4da2f71f47119d4b8
     m_Address: Assets/Application/TopTower/ModuleData/MD_Commercial_Figure.asset
@@ -77,6 +113,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - ModuleData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1eedae3e8655854408f6e1463a537ca8
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Restaurant_Curry_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 202fa6865e7cada498201c28cf88fa27
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Commercial_100shop.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2212bd236cb59d54c94668859dc8d779
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Residence_Ryokan.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 23823d0b70c6c1940952d6db228b077c
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Commercial_Figure_001.png
     m_ReadOnly: 0
@@ -89,17 +143,35 @@ MonoBehaviour:
     m_SerializedLabels:
     - ModuleData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 254e68c9b85f50042987e7d92f0e0dd1
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Restaurant_Takoyaki.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 25593e3ee9574e247817441f0d2fbc4d
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Structural_Wall_001.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage_001
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25c0b60a581817240b96bba22ca566d2
+    m_Address: "Assets/Application/TopTower/Etc/\uAC8C\uC784\uBA54\uBAA8.txt"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Etc
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 295c73a1e0fb5b94488688bce6e680b2
     m_Address: Assets/Application/TopTower/ModuleData/MD_Residence_Sharehouse.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a915aa35f704fa4094951661303cd3f
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Restaurant_Homemade_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2ac483e02a8186942a634daa017fdc81
     m_Address: Assets/Application/TopTower/ModuleData/MD_Structural_Root.asset
@@ -143,6 +215,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - bigger
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3899c8d1f75a21f408e1340a785d7109
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Commercial_Karaoke_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3a015c4bd43a8ef45a80fb4665d323e8
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Commercial_Drug_001.png
     m_ReadOnly: 0
@@ -163,6 +241,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3f37e189a6337314880f8d7b4ef8433e
     m_Address: Assets/Application/TopTower/ModuleData/MD_Commercial_Drug.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3fe10d4a958bdf1449e5ada75d304f72
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Commercial_Fude_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 406c952e14e68e84fab400aa5d54b912
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Commercial_Fude.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - ModuleData
@@ -203,6 +293,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - bigger
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 50155e58b956c1c469b7c7d3bdd8096d
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Commercial_Kendo_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5397a28e77e53644a9df8a2bce6a8186
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Office_Anime_001.png
     m_ReadOnly: 0
@@ -215,11 +311,35 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage_001
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 548003f90ffe3d44fab904855490e684
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Commercial_Kendo.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56c674c8807f0bb4e91396416afe64bb
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Hamburg_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 579869561e93a0647848c5c8261529a3
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Omakase_001.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5814b06aa3e69cc4fa1e7ec456ffed85
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Restaurant_Famires_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 589fe1fc8a571b74f9fe7956d34b2f84
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Restaurant_Takoyaki_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5c2659321eda9e14a8364e78dfa1480e
     m_Address: Assets/Application/TopTower/StageData/Stage_001.asset
@@ -232,6 +352,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Background
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 600bcb1035423c24ba3f4931a8d54821
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Restaurant_Homemade.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 605233f8cf50a104c9244a6ff7042380
     m_Address: "Assets/Application/TopTower/Image/\uCC38\uC8702.png"
@@ -275,6 +401,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage_001
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6cfff98ee14b58241a956190ffe43e74
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Restaurant_Famires.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6e90a2f75c9e05242867a9f77b9f8d68
     m_Address: Assets/Application/TopTower/Image/Module/StageCommon/System_Empty_004.png
     m_ReadOnly: 0
@@ -299,6 +431,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Font
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 748e9d3d86eebac4082b153a6570a657
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Restaurant_Maidcafe.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 74fe01d548e75be478a307c3a72c2d43
     m_Address: Assets/Application/TopTower/ModuleData/MD_Office_Train.asset
     m_ReadOnly: 0
@@ -310,6 +448,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7978e679e3f3572448be2ad415e5c02a
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Restaurant_Hamburg.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7a1020149685a7a48ae84ad39fdda776
     m_Address: Assets/Application/TopTower/Image/UI/IMG_GradientTop.png
@@ -337,6 +481,36 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 840dfc0a58dffd94c9500ac53aaaf660
     m_Address: Assets/Application/TopTower/ModuleData/MD_Commercial_Book.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85b23e90bb94a1f45abe4e0eb9de7d12
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Office_People.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88478fb3112c02547ab03a83406c0208
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Restaurant_Hamburg_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b9d1cfa5f8d7be4eba6473576fe3bb1
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Residence_Mension_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8be3b8d192a9e584b9729061b252da07
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Residence_Mension_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c88664fdf2af294397b4f7aee313223
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Office_Bank.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - ModuleData
@@ -389,8 +563,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage_001
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9522abd37e0711b42a8f255912917c69
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Commercial_Karaoke_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9731bdc6250db61478ee769afe511fc0
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Residence_Oneroom_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 98e2e495542dae6448539a073b26e926
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Restaurant_Maidcafe_001.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - bigger
@@ -401,11 +587,23 @@ MonoBehaviour:
     m_SerializedLabels:
     - Font
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ccc67ec4e75f484d9fa3f99a60a743c
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Famires_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9cf4d873a47869a41bcdd7a51e5026e0
     m_Address: Assets/Application/TopTower/Image/UI/IMG_GradientBottom.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d4ea11bffd004545b607ae77b9bf6b4
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Commercial_Karaoke.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9f5e5e8bf3205ec44a79f53ce30d31f4
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Donburi_001.png
@@ -415,6 +613,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9f77c4abe58de9445aa30939b9f71fb2
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Commercial_Onsen_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a46c92cb0696c8c43aef13bb4d84bda4
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Office_Bank_001.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - Stage_001
@@ -437,11 +641,23 @@ MonoBehaviour:
     m_SerializedLabels:
     - Background
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ab5289e9df9bdf34f8e0711a57ef7f60
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Izakaya_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b17987c1cfa148347b85e0b5b82bc1f9
     m_Address: "Assets/Application/TopTower/Etc/\uADF8\uB9BC\uCCB4\uC0DD\uC131\uC6A9.png"
     m_ReadOnly: 0
     m_SerializedLabels:
     - Etc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b32f8e65566fd524f99817c330be323f
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Commercial_100shop_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b3f4ea9ec3ee6604598c7b052157bc82
     m_Address: Assets/Application/TopTower/ModuleData/MD_Structural_Wallfr.asset
@@ -497,17 +713,53 @@ MonoBehaviour:
     m_SerializedLabels:
     - bigger
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf81b8e74d186344cadea4441b058a2a
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Restaurant_Izakaya.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c09c15262381d934d8125ba2832c2ed6
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Office_People_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c65924d051714b245a119b24b782affa
     m_Address: Assets/Application/TopTower/ModuleData/MD_Commercial_Onsen.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - ModuleData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c72932cce661d044ba2356f66450f1c5
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Commercial_Traditional.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8c6a72c587e09041b44e592f0c3b5cb
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Commercial_Fude_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca9f32cdd958ce647817e75c2e68a8f8
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Homemade_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d299d40832489884b9006447705fe7d6
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Restaurant_Ramen_001.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - bigger
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3294ce83989de54ebda3b37452fa8db
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Commercial_Kendo_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d4a2dc61b85685440b4d48ae700d19f4
     m_Address: Assets/Application/TopTower/Font/MalgunGothicBold SDF.asset
@@ -533,6 +785,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - ModuleData
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d975660fbc6b04d42861bcdca9b5544b
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Commercial_100shop_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - bigger
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: da792cece0524676bb521c2f613d37eb
     m_Address: Assets/Application/TopTower/ModuleData/MD_Restaurant_Ramen.asset
     m_ReadOnly: 0
@@ -544,6 +802,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - bigger
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbfe30042afd440488383568cdb79a2e
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Commercial_Traditional_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dd4141a7377ae4341b34bd2ead027678
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Office_Architecture_001.png
@@ -563,11 +827,23 @@ MonoBehaviour:
     m_SerializedLabels:
     - Stage_001
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e87744a79cc9e71409b2c7b579014c23
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Residence_2LDK_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ea0c67f68b58fe647a97e1d9f129094e
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Commercial_Onsen_001.png
     m_ReadOnly: 0
     m_SerializedLabels:
     - bigger
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea5e34b7636f74a4e9cd2de1a26dc133
+    m_Address: Assets/Application/TopTower/ModuleData/MD_Restaurant_Curry.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ModuleData
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ec0a85a066f5b8845831651a16e28b22
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/bigger/001_Restaurant_Donburi_001.png
@@ -598,6 +874,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - StageData
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc27460c62fef8a4bb8179e397b5482c
+    m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Maidcafe_001.png
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Stage_001
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fcdbe0c8c93f683489aa0d61deae014f
     m_Address: Assets/Application/TopTower/Image/Module/Stage_001/001_Restaurant_Ramen_001.png
