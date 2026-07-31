@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e816df7b332fda7488de9e7783f68513, type: 3}
+  m_Name: MD_Office_Manga
+  m_EditorClassIdentifier: 
+  group: 4
+  moduleName: Manga
+  cube: 0
+  frame: 2
+  allowedZones: 01000000
+  extend: 0
+  clickable: 1
+  roomName: "\uB9CC\uD654 \uCD9C\uD310\uC0AC"
+  description: "\uC778\uAE30 \uB9CC\uD654\uB97C \uD3B4\uB0B4\uB294 \uCD9C\uD310\uC0AC
+    \uD3B8\uC9D1\uBD80."
+  dailyRent: 5
+  buildCost: 10
+  buildSeconds: 3
+  sprite: {fileID: 21300000, guid: 317d1b626183d0248a7c71f5ff57e359, type: 3}

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e816df7b332fda7488de9e7783f68513, type: 3}
+  m_Name: MD_Restaurant_Yakiniku
+  m_EditorClassIdentifier: 
+  group: 2
+  moduleName: Yakiniku
+  cube: 0
+  frame: 2
+  allowedZones: 01000000
+  extend: 0
+  clickable: 1
+  roomName: "\uC57C\uD0A4\uB2C8\uCFE0\uC9D1"
+  description: "\uC22F\uBD88\uC5D0 \uACE0\uAE30\uB97C \uAD6C\uC6CC \uBA39\uB294 \uC57C\uD0A4\uB2C8\uCFE0
+    \uC804\uBB38\uC810."
+  dailyRent: 5
+  buildCost: 10
+  buildSeconds: 3
+  sprite: {fileID: 21300000, guid: 9c6bbb3d3e8432246899100aa62690a6, type: 3}

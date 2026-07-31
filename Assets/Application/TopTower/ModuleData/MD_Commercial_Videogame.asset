@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e816df7b332fda7488de9e7783f68513, type: 3}
+  m_Name: MD_Commercial_Videogame
+  m_EditorClassIdentifier: 
+  group: 3
+  moduleName: Videogame
+  cube: 0
+  frame: 2
+  allowedZones: 01000000
+  extend: 0
+  clickable: 1
+  roomName: "\uAC8C\uC784\uC0F5"
+  description: "\uCD5C\uC2E0 \uAC8C\uC784\uACFC \uCF58\uC194\uC744 \uD30C\uB294 \uBE44\uB514\uC624\uAC8C\uC784
+    \uC804\uBB38\uC810."
+  dailyRent: 5
+  buildCost: 10
+  buildSeconds: 3
+  sprite: {fileID: 21300000, guid: e2f3d89a556fc6246852a6f95535efa3, type: 3}

@@ -18,8 +18,8 @@ MonoBehaviour:
   frame: 2
   allowedZones: 01000000
   extend: 0
-  clickable: 0
-  roomName: "\uC99D\uAD8C\uC0AC '\uBAA8\uB9AC\uBB34\uB77C'"
+  clickable: 1
+  roomName: "\uC99D\uAD8C\uC0AC"
   description: "\uC77C\uBCF8\uC758 \uC99D\uC2DC\uB97C \uB204\uBE44\uB294 \uBAA8\uB9AC\uBB34\uB77C
     \uC99D\uAD8C\uD68C\uC0AC."
   dailyRent: 5
