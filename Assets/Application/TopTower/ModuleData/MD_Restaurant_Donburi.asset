@@ -16,12 +16,12 @@ MonoBehaviour:
   moduleName: Donburi
   cube: 0
   frame: 2
-  allowedZones: 0100000000000000
+  allowedZones: 01000000
   extend: 0
   clickable: 1
   roomName: "\uB36E\uBC25\uAC00\uAC8C"
   description: "\uADDC\uB3D9\uACFC \uD150\uB3D9\uC744 \uB0B4\uB294 \uC815\uD1B5 \uB36E\uBC25\uC9D1."
-  dailyRent: 5
+  incomePerSecond: 5
   buildCost: 10
   buildSeconds: 3
   sprite: {fileID: 21300000, guid: 9f5e5e8bf3205ec44a79f53ce30d31f4, type: 3}

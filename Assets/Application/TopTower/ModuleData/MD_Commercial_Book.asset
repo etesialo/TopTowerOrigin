@@ -16,13 +16,13 @@ MonoBehaviour:
   moduleName: Book
   cube: 0
   frame: 2
-  allowedZones: 0100000000000000
+  allowedZones: 01000000
   extend: 0
   clickable: 1
   roomName: "\uC11C\uC810"
   description: "\uB9CC\uD654\uCC45\uACFC \uC7A1\uC9C0, \uB77C\uC774\uD2B8 \uB178\uBCA8\uC744
     \uD30C\uB294 \uB300\uD615 \uC11C\uC810"
-  dailyRent: 5
+  incomePerSecond: 5
   buildCost: 10
   buildSeconds: 3
   sprite: {fileID: 21300000, guid: 3d8e448bda8eb934180455473dde9019, type: 3}

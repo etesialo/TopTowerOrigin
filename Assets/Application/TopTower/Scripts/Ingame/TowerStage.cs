@@ -39,6 +39,9 @@ namespace KS.TopTower
 
         private async UniTaskVoid Start()
         {
+            // 세이브 로드 + 복원(골드·슬롯)을 빌딩 렌더 '전에' 수행 → 복원 상태로 그려짐.
+            GamePersistence.LoadIntoGame();
+
             if (_stagePrefab != null)
             {
                 _instance = Instantiate(_stagePrefab);   // 직접 참조 로드

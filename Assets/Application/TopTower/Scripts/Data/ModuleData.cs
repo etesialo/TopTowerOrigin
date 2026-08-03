@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace KS.TopTower
 {
@@ -50,8 +51,9 @@ namespace KS.TopTower
         [TextArea(2, 5)]
         [Tooltip("방 설명.")]
         public string description;
-        [Tooltip("일일 임대료.")]
-        public long dailyRent;
+        [Tooltip("초당 수입(gold/sec). 입주 세입자가 초당 버는 골드. (구 dailyRent)")]
+        [FormerlySerializedAs("dailyRent")]
+        public long incomePerSecond;
 
         [Header("건설 (임차인 입주)")]
         [Tooltip("공사 비용(재화 소모). 임대 업종 모듈용. 0이면 건설 대상 아님(구조/시스템 등).")]

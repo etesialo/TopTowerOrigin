@@ -16,13 +16,13 @@ MonoBehaviour:
   moduleName: Ramen
   cube: 0
   frame: 2
-  allowedZones: 0100000000000000
+  allowedZones: 01000000
   extend: 0
   clickable: 1
   roomName: "\uB77C\uBA58\uC9D1"
   description: "\uC9C4\uD55C \uAD6D\uBB3C\uC758 \uB3C4\uCFC4 \uB77C\uBA58 \uC804\uBB38\uC810.\n\uB3C8\uCF54\uCE20\uB77C\uBA58\uC774
     \uC8FC\uB825\uC774\uB2E4."
-  dailyRent: 5
+  incomePerSecond: 5
   buildCost: 10
   buildSeconds: 3
   sprite: {fileID: 21300000, guid: fcdbe0c8c93f683489aa0d61deae014f, type: 3}

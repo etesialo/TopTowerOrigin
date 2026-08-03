@@ -69,6 +69,7 @@ namespace KS.TopTower
         //  - 전용: Stage_{NNN}_{Type}_{ID}          예: Stage_001_Wall_001
         // Empty는 그룹 접두어(Structural→Facility 등)가 바뀌어도 잡히도록 _{Type}_ 키워드 매칭.
         private const string EmptyNameKeyword = "_Empty_";
+        private const string ConstructionNameKeyword = "_Consinterior_";   // 공사중 실내 스프라이트 (StageCommon 공통)
 
         // Indoor ceiling sprite 없을 때 fallback 색 (진파랑)
         private static readonly Color CeilingFallbackColor = new Color(0.1f, 0.15f, 0.4f);
@@ -745,6 +746,11 @@ namespace KS.TopTower
                     .Where(s => TryParseTrailingId(s.name, out int id) && id >= EmptyBasicIdMin && id <= EmptyBasicIdMax)
                     .ToList();
 
+            // 공사중 실내 스프라이트 캐시 (StageCommon의 _Consinterior_ 전부)
+            _cachedConstruction = sprites != null
+                ? sprites.Where(s => s.name.Contains(ConstructionNameKeyword)).ToList()
+                : new List<Sprite>();
+
             // 모듈 영역 (엘베 위치 기반)
             // Left(C, col 2)  → 모듈 D-E-F-G = col 3~6
             // Right(G, col 6) → 모듈 C-D-E-F = col 2~5
@@ -760,6 +766,7 @@ namespace KS.TopTower
             _cachedEmpties = basicEmpties;
             _moduleGeo.Clear();
 
+            _moduleGeo.Clear();
             for (int floorIdx = 0; floorIdx < sortedFloors.Count; floorIdx++)
             {
                 var floor = sortedFloors[floorIdx];
@@ -772,48 +779,109 @@ namespace KS.TopTower
                 if (!allIndoor) continue;
 
                 int fi = floor.FloorIndex;
-                float x = moduleStartCol * cubeWidth;
                 float y = -floorIdx * stackHeight - ceilingHeight + _currentYOffset;
-                _moduleGeo[fi] = new Vector4(x, y, moduleWidthPx, cubeHeight);
-                PlaceFloorModule(fi, x, y, moduleWidthPx, cubeHeight);
+
+                // 셀 분할: 지하=2셀(2큐브씩, 시설 나란히), 지상=1셀(전체 4큐브)
+                int totalCubes = moduleEndCol - moduleStartCol + 1;
+                int cellCubes = fi < 0 ? UndergroundCellCubes : totalCubes;
+                if (cellCubes <= 0) cellCubes = totalCubes;
+                int cellCount = Mathf.Max(1, totalCubes / cellCubes);
+                for (int cell = 0; cell < cellCount; cell++)
+                {
+                    int startCol = moduleStartCol + cell * cellCubes;
+                    float cx = startCol * cubeWidth;
+                    float cwidth = cellCubes * cubeWidth;
+                    _moduleGeo[(fi, cell)] = new Vector4(cx, y, cwidth, cubeHeight);
+                    PlaceCellModule(fi, cell, cx, y, cwidth, cubeHeight);
+                }
+
+                // 셀 사이 검은 구분벽 (엘베 옆 벽처럼). 셀이 2개 이상일 때 경계마다.
+                if (cellCount > 1)
+                {
+                    float dw = Mathf.Max(4f, cubeWidth * CellDividerWidthRatio);
+                    for (int b = 1; b < cellCount; b++)
+                    {
+                        float bx = (moduleStartCol + b * cellCubes) * cubeWidth;
+                        CreateCellDivider(fi, b, bx - dw * 0.5f, y, dw, cubeHeight);
+                    }
+                }
             }
         }
 
-        // 모듈 영역 지오메트리 + 빈방 스프라이트 캐시 (RefreshFloorModule 재사용용)
-        private readonly Dictionary<int, Vector4> _moduleGeo = new Dictionary<int, Vector4>();
-        private List<Sprite> _cachedEmpties = new List<Sprite>();
+        private const float CellDividerWidthRatio = 0.08f;   // 구분벽 폭 = 큐브폭 × 이 값
 
-        /// <summary>한 층 모듈 슬롯을 상태에 맞게 생성 (빈방/공사중/입주완료).</summary>
-        private void PlaceFloorModule(int fi, float x, float y, float moduleWidthPx, float cubeHeight)
+        /// <summary>셀 사이 검은 세로 구분벽 1개 생성 (정적 — RefreshCell에서 앞으로 재정렬).</summary>
+        private void CreateCellDivider(int fi, int idx, float x, float y, float width, float height)
         {
+            var go = new GameObject("CellDivider_F" + fi + "_" + idx, typeof(RectTransform), typeof(UnityEngine.UI.Image));
+            if (!Application.isPlaying) go.hideFlags = HideFlags.HideAndDontSave;
+            go.transform.SetParent(_cubeContainer, false);
+            var rt = go.GetComponent<RectTransform>();
+            rt.anchorMin = new Vector2(0, 1); rt.anchorMax = new Vector2(0, 1); rt.pivot = new Vector2(0, 1);
+            rt.anchoredPosition = new Vector2(x, y); rt.sizeDelta = new Vector2(width, height);
+            var img = go.GetComponent<UnityEngine.UI.Image>();
+            img.color = Color.black; img.raycastTarget = false;
+        }
+
+        /// <summary>해당 층의 구분벽들을 맨 앞으로 (셀 모듈 위에 보이도록).</summary>
+        private void FrontDividers(int floorIndex)
+        {
+            if (_cubeContainer == null) return;
+            string prefix = "CellDivider_F" + floorIndex + "_";
+            for (int i = 0; i < _cubeContainer.childCount; i++)
+            {
+                var ch = _cubeContainer.GetChild(i);
+                if (ch.name.StartsWith(prefix)) ch.SetAsLastSibling();
+            }
+        }
+
+        // 셀 지오메트리((floor,cell)→x,y,w,h) + 빈방/공사 스프라이트 캐시 (RefreshCell 재사용용)
+        private const int UndergroundCellCubes = 2;   // 지하 셀 폭(큐브). 시설 2슬롯.
+        private readonly Dictionary<(int floor, int cell), Vector4> _moduleGeo = new Dictionary<(int, int), Vector4>();
+        private List<Sprite> _cachedEmpties = new List<Sprite>();
+        private List<Sprite> _cachedConstruction = new List<Sprite>();   // 공사중 실내 스프라이트 후보
+
+        private static string CellTag(int fi, int cell) => "F" + fi + "C" + cell;
+
+        /// <summary>한 셀 모듈 슬롯을 상태에 맞게 생성 (빈방/공사중/입주완료).</summary>
+        private void PlaceCellModule(int fi, int cell, float x, float y, float cellWidthPx, float cubeHeight)
+        {
+            string tag = CellTag(fi, cell);
             var bm = BuildManager.Instance;
-            var slot = bm != null ? bm.GetSlot(fi) : null;
+            var slot = bm != null ? bm.GetSlot(fi, cell) : null;
             if (slot != null && slot.status == BuildManager.SlotStatus.Constructing)
             {
-                CreateConstructionModule(fi, x, y, moduleWidthPx, cubeHeight);
+                CreateConstructionModule(fi, cell, x, y, cellWidthPx, cubeHeight);
             }
             else if (slot != null && slot.status == BuildManager.SlotStatus.Built
                      && slot.module != null && slot.module.sprite != null)
             {
-                var built = CreateSpriteImage("BuiltModule_F" + fi, slot.module.sprite, x, y, moduleWidthPx, cubeHeight);
-                TryMakeClickable(built, slot.module.sprite.name, fi);
+                var built = CreateSpriteImage("BuiltModule_" + tag, slot.module.sprite, x, y, cellWidthPx, cubeHeight);
+                TryMakeClickable(built, slot.module.sprite.name, fi, cell);
             }
             else
             {
                 if (_cachedEmpties == null || _cachedEmpties.Count == 0) return;
-                var sprite = _cachedEmpties[Random.Range(0, _cachedEmpties.Count)];
-                var emptyGo = CreateSpriteImage("EmptyModule_F" + fi, sprite, x, y, moduleWidthPx, cubeHeight);
-                TryMakeClickable(emptyGo, sprite.name, fi);
+                // empty 모듈은 1슬롯 고정 → 셀을 1슬롯짜리 empty로 채움(칸마다 랜덤).
+                float cubeW = _cubeContainer != null ? _cubeContainer.rect.width / _gridWidth : cellWidthPx;
+                int slotCount = Mathf.Max(1, Mathf.RoundToInt(cellWidthPx / cubeW));
+                for (int i = 0; i < slotCount; i++)
+                {
+                    var sprite = _cachedEmpties[Random.Range(0, _cachedEmpties.Count)];
+                    var emptyGo = CreateSpriteImage("EmptyModule_" + tag, sprite, x + i * cubeW, y, cubeW, cubeHeight);
+                    TryMakeClickable(emptyGo, sprite.name, fi, cell);
+                }
             }
         }
 
-        /// <summary>해당 층 모듈만 파괴 후 재생성 (전체 재렌더 없이 — 깜빡임 방지). BuildManager가 호출.</summary>
-        public void RefreshFloorModule(int floorIndex)
+        /// <summary>해당 셀만 파괴 후 재생성 (전체 재렌더 없이 — 깜빡임 방지). BuildManager가 호출.</summary>
+        public void RefreshCell(int floorIndex, int cell)
         {
             if (_cubeContainer == null) return;
-            if (!_moduleGeo.TryGetValue(floorIndex, out var g)) return;
+            if (!_moduleGeo.TryGetValue((floorIndex, cell), out var g)) return;
 
-            string en = "EmptyModule_F" + floorIndex, bn = "BuiltModule_F" + floorIndex, cn = "Construction_F" + floorIndex;
+            string tag = CellTag(floorIndex, cell);
+            string en = "EmptyModule_" + tag, bn = "BuiltModule_" + tag, cn = "Construction_" + tag;
             for (int i = _cubeContainer.childCount - 1; i >= 0; i--)
             {
                 var ch = _cubeContainer.GetChild(i);
@@ -822,20 +890,31 @@ namespace KS.TopTower
                     if (Application.isPlaying) Destroy(ch.gameObject); else DestroyImmediate(ch.gameObject);
                 }
             }
-            PlaceFloorModule(floorIndex, g.x, g.y, g.z, g.w);
+            PlaceCellModule(floorIndex, cell, g.x, g.y, g.z, g.w);
+            FrontDividers(floorIndex);   // 구분벽이 새 모듈 위에 보이도록
         }
 
-        /// <summary>실내공사모듈: 흰 네모 + 남은시간 카운트다운(자체 갱신).</summary>
-        private void CreateConstructionModule(int floorIndex, float x, float y, float width, float height)
+        /// <summary>해당 층의 모든 셀 갱신.</summary>
+        public void RefreshFloorModule(int floorIndex)
         {
-            var go = new GameObject($"Construction_F{floorIndex}", typeof(RectTransform), typeof(UnityEngine.UI.Image));
+            int cells = BuildManager.CellCountForFloor(floorIndex);
+            for (int c = 0; c < cells; c++) RefreshCell(floorIndex, c);
+        }
+
+        /// <summary>실내공사모듈: consinterior 스프라이트 + 남은시간 카운트다운(자체 갱신). 스프라이트 미로드 시 흰 네모.</summary>
+        private void CreateConstructionModule(int floorIndex, int cell, float x, float y, float width, float height)
+        {
+            var go = new GameObject("Construction_" + CellTag(floorIndex, cell), typeof(RectTransform), typeof(UnityEngine.UI.Image));
             if (!Application.isPlaying) go.hideFlags = HideFlags.HideAndDontSave;
             go.transform.SetParent(_cubeContainer, false);
             var rt = go.GetComponent<RectTransform>();
             rt.anchorMin = new Vector2(0, 1); rt.anchorMax = new Vector2(0, 1); rt.pivot = new Vector2(0, 1);
             rt.anchoredPosition = new Vector2(x, y); rt.sizeDelta = new Vector2(width, height);
             var img = go.GetComponent<UnityEngine.UI.Image>();
-            img.color = Color.white; img.raycastTarget = false;   // 실내공사모듈 임시 흰 네모
+            img.raycastTarget = false;
+            img.color = Color.white;
+            if (_cachedConstruction != null && _cachedConstruction.Count > 0)
+                img.sprite = _cachedConstruction[Random.Range(0, _cachedConstruction.Count)];   // 공사중 실내 이미지 (없으면 흰 네모)
 
             var txtGo = new GameObject("Countdown", typeof(RectTransform), typeof(TMPro.TextMeshProUGUI));
             if (!Application.isPlaying) txtGo.hideFlags = HideFlags.HideAndDontSave;
@@ -848,7 +927,7 @@ namespace KS.TopTower
             tmp.alignment = TMPro.TextAlignmentOptions.Center; tmp.raycastTarget = false;
 
             var cd = go.AddComponent<ConstructionCountdown>();
-            cd.Init(floorIndex, tmp);
+            cd.Init(floorIndex, cell, tmp);
         }
 
         /// <summary>
@@ -1277,7 +1356,7 @@ namespace KS.TopTower
                 var elevGo = CreateSpriteImage($"Elevator_F{floor.FloorIndex}", elevatorSprite,
                     elevatorCol * cubeWidth, -floorIdx * stackHeight - ceilingHeight + _currentYOffset,
                     cubeWidth, cubeHeight);
-                TryMakeClickable(elevGo, elevatorSprite.name, floor.FloorIndex);
+                TryMakeClickable(elevGo, elevatorSprite.name, floor.FloorIndex, -1);   // 엘베는 빌드 셀 아님(-1)
             }
         }
 
@@ -1363,7 +1442,7 @@ namespace KS.TopTower
         /// 런타임 전용: 해당 모듈이 clickable(모듈 설정 툴 토글)이면 raycast 켜고 ModuleClickable 부착.
         /// 클릭 시 방 정보 팝업. 드래그는 IDragHandler 없어서 상위 StageViewport로 전달됨.
         /// </summary>
-        private void TryMakeClickable(GameObject go, string spriteName, int floorIndex)
+        private void TryMakeClickable(GameObject go, string spriteName, int floorIndex, int cell)
         {
             if (!Application.isPlaying || go == null) return;
             var md = ModuleDatabase.GetBySpriteName(spriteName);
@@ -1373,6 +1452,7 @@ namespace KS.TopTower
             var clk = go.AddComponent<ModuleClickable>();
             clk.spriteName = spriteName;
             clk.floorIndex = floorIndex;
+            clk.cellIndex = cell;
         }
 
         /// <summary>

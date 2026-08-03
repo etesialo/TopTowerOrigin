@@ -9,11 +9,13 @@ namespace KS.TopTower
     public class ConstructionCountdown : MonoBehaviour
     {
         public int floorIndex;
+        public int cellIndex;
         [SerializeField] private TMP_Text _text;
 
-        public void Init(int floor, TMP_Text text)
+        public void Init(int floor, int cell, TMP_Text text)
         {
             floorIndex = floor;
+            cellIndex = cell;
             _text = text;
         }
 
@@ -21,7 +23,7 @@ namespace KS.TopTower
         {
             if (_text == null) return;
             var bm = BuildManager.Instance;
-            float remain = bm != null ? bm.RemainingSeconds(floorIndex) : 0f;
+            float remain = bm != null ? bm.RemainingSeconds(floorIndex, cellIndex) : 0f;
             _text.text = Mathf.CeilToInt(remain) + "s";
         }
     }

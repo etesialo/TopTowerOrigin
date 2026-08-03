@@ -37,7 +37,7 @@ namespace KS.TopTower.EditorTools
         private bool _clickable;
         private string _roomName = "";
         private string _description = "";
-        private long _dailyRent;
+        private long _incomePerSecond;
         private long _buildCost;
         private float _buildSeconds = 10f;
 
@@ -120,7 +120,7 @@ namespace KS.TopTower.EditorTools
                 _clickable = _loadedAsset.clickable;
                 _roomName = _loadedAsset.roomName;
                 _description = _loadedAsset.description;
-                _dailyRent = _loadedAsset.dailyRent;
+                _incomePerSecond = _loadedAsset.incomePerSecond;
                 _buildCost = _loadedAsset.buildCost;
                 _buildSeconds = _loadedAsset.buildSeconds;
             }
@@ -134,7 +134,7 @@ namespace KS.TopTower.EditorTools
                 _clickable = d.clickable;
                 _roomName = e.name;   // 기본 방이름 = 모듈명 (편집 권장)
                 _description = "";
-                _dailyRent = 0;
+                _incomePerSecond = 0;
                 _buildCost = 0;
                 _buildSeconds = 10f;
             }
@@ -221,7 +221,7 @@ namespace KS.TopTower.EditorTools
             _roomName = EditorGUILayout.TextField("방 이름(RoomName)", _roomName);
             EditorGUILayout.LabelField("방 설명(Description)");
             _description = EditorGUILayout.TextArea(_description, GUILayout.MinHeight(48));
-            _dailyRent = EditorGUILayout.LongField("일일 임대료(Daily Rent)", _dailyRent);
+            _incomePerSecond = EditorGUILayout.LongField("초당 수입(Income/sec)", _incomePerSecond);
             _buildCost = EditorGUILayout.LongField("공사비용(Build Cost)", _buildCost);
             _buildSeconds = EditorGUILayout.FloatField("건설시간 초(Build Seconds)", _buildSeconds);
             EditorGUILayout.Space();
@@ -256,7 +256,7 @@ namespace KS.TopTower.EditorTools
             data.clickable = _clickable;
             data.roomName = _roomName;
             data.description = _description;
-            data.dailyRent = _dailyRent;
+            data.incomePerSecond = _incomePerSecond;
             data.buildCost = _buildCost;
             data.buildSeconds = _buildSeconds;
 
@@ -297,6 +297,12 @@ namespace KS.TopTower.EditorTools
         [MenuItem("Tools/Top Tower/Scan & Add Missing Modules")]
         public static void GenerateDefaults()
         {
+            // 0) bigger 원본 -> 세로 195(롱)/52(숏) 최적화본 자동 생성 (없거나 더 최신일 때만)
+            int optC, optS, optF;
+            ModuleImageOptimizer.Optimize(out optC, out optS, out optF);
+            if (optC > 0 || optF > 0)
+                Debug.Log("[ModuleTypeTool] 이미지 최적화: 생성 " + optC + " / 스킵 " + optS + " / 실패 " + optF);
+
             EnsureFolder(ModuleDataFolder);
             int created = 0, skipped = 0;
             var seen = new HashSet<string>();
@@ -322,7 +328,7 @@ namespace KS.TopTower.EditorTools
                 {
                     data.buildCost = 10;
                     data.buildSeconds = 3f;
-                    data.dailyRent = 5;
+                    data.incomePerSecond = 5;
                 }
                 data.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
                 AssetDatabase.CreateAsset(data, assetPath);
@@ -367,8 +373,8 @@ namespace KS.TopTower.EditorTools
                 case "empty":       return D(CubeSize.Long, Frame.Indoor, Zone.Aboveground, Zone.Underground);
             }
             if (group == ModuleGroup.Structural) return D(CubeSize.Long, Frame.Outdoor, Zone.Aboveground);
-            if (group == ModuleGroup.Facility)   return D(CubeSize.Long, Frame.Indoor, Zone.Aboveground, Zone.Underground);
-            return D(CubeSize.Long, Frame.Indoor, Zone.Aboveground);
+            if (group == ModuleGroup.Facility)   return D(CubeSize.Long, Frame.Indoor, Zone.Underground);   // 시설 = 지하 전용
+            return D(CubeSize.Long, Frame.Indoor, Zone.Aboveground);                                        // 임대 업종 = 지상 전용
         }
 
         private static Def D(CubeSize c, Frame f, params Zone[] z)

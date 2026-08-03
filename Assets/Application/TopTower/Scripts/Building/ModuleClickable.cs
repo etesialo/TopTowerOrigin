@@ -12,6 +12,7 @@ namespace KS.TopTower
     {
         public string spriteName;   // 예: "System_Empty_002" → ModuleDatabase 조회 키
         public int floorIndex;      // 이 모듈이 속한 층 (임차인 찾기/건설 대상)
+        public int cellIndex;       // 층 내 셀 위치 (지하 0/1, 지상 0, 엘베 등 -1)
 
         [Tooltip("팝업이 뜨기까지 눌러야 하는 시간(초).")]
         [SerializeField] private float _holdSeconds = 0.4f;
@@ -55,7 +56,7 @@ namespace KS.TopTower
                 _fired = true;
                 _pressing = false;
                 var data = ModuleDatabase.GetBySpriteName(spriteName);
-                RoomInfoPopup.ShowFor(data, spriteName, floorIndex);
+                RoomInfoPopup.ShowFor(data, spriteName, floorIndex, cellIndex);
             }
         }
     }

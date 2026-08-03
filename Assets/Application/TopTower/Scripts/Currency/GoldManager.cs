@@ -5,9 +5,9 @@ namespace KS.TopTower
 {
     /// <summary>
     /// 재화(Gold) 중앙 관리. InGameScene에 배치.
-    /// - 아이들 골드: 방치 시 초당 자동 적립 (기본 10/초).
+    /// - 방치 수입: IncomeManager.TotalRatePerSec(입주 세입자 초당 수입 합)을 매 프레임 누적.
     /// - 상한: MaxGold 도달 시 더 오르지 않고 초과분 무시.
-    /// - 다른 수입원(임대료·보상 등)은 GoldManager.Instance.Add(amount) 호출로 합류 예정.
+    /// - 다른 수입원(오프라인 정산·보상 등)은 GoldManager.Instance.Add(amount) 호출로 합류.
     /// </summary>
     public class GoldManager : MonoBehaviour
     {
@@ -17,14 +17,12 @@ namespace KS.TopTower
         [Tooltip("시작 골드.")]
         [SerializeField] private long _startGold = 0;
 
-        [Tooltip("아이들 골드: 한 번에 오르는 양(덩어리).")]
-        [SerializeField] private long _idleGoldPerTick = 10;
-
-        [Tooltip("아이들 골드: 지급 간격(초). 이 간격마다 위 양만큼 '한 번에' 오름.")]
-        [SerializeField] private float _idleTickSeconds = 1f;
+        [Tooltip("수입 지급 간격(초). 이 간격마다 그동안 번 만큼을 '한 번에' 올린다(1씩 스르륵 X).")]
+        [SerializeField] private float _payoutIntervalSeconds = 1f;
 
         private long _gold;
-        private float _idleTimer;
+        private double _carry;    // 초당 수입 누적 버퍼(소수부 포함)
+        private float _payoutTimer;
 
         public static GoldManager Instance { get; private set; }
 
@@ -54,14 +52,25 @@ namespace KS.TopTower
 
         private void Update()
         {
-            if (_idleGoldPerTick <= 0 || _idleTickSeconds <= 0f || _gold >= MaxGold) return;
+            if (_gold >= MaxGold) return;
 
-            // 간격마다 덩어리로 '한 번에' 지급 (예: 1초마다 +10 → 0, 10, 20, 30 …)
-            _idleTimer += Time.deltaTime;
-            while (_idleTimer >= _idleTickSeconds)
+            // 수입은 매 프레임 내부 버퍼에만 계속 누적 (아직 화면엔 반영 X)
+            var im = IncomeManager.Instance;
+            double rate = im != null ? im.TotalRatePerSec : 0.0;
+            if (rate > 0.0) _carry += rate * Time.deltaTime;
+
+            // 간격마다 그동안 쌓인 정수분을 '한 번에' 지급 → 눈에 보이는 덩어리 상승
+            if (_payoutIntervalSeconds <= 0f) _payoutIntervalSeconds = 1f;
+            _payoutTimer += Time.deltaTime;
+            if (_payoutTimer >= _payoutIntervalSeconds)
             {
-                _idleTimer -= _idleTickSeconds;
-                Add(_idleGoldPerTick);
+                _payoutTimer -= _payoutIntervalSeconds;
+                if (_carry >= 1.0)
+                {
+                    long whole = (long)_carry;
+                    _carry -= whole;
+                    Add(whole);   // 1회 지급 = 1회 OnGoldChanged → 한 번에 점프
+                }
             }
         }
 
@@ -76,6 +85,14 @@ namespace KS.TopTower
                 _gold = next;
                 OnGoldChanged?.Invoke(_gold);
             }
+        }
+
+        /// <summary>골드 절대값 설정 (세이브 로드 시). 상한 클램프 + UI 통지.</summary>
+        public void SetGold(long value)
+        {
+            _gold = Clamp(value);
+            _carry = 0.0;
+            OnGoldChanged?.Invoke(_gold);
         }
 
         /// <summary>골드 사용. 부족하면 false (추후 상점/건설 등에서 사용).</summary>

@@ -22,6 +22,7 @@ namespace KS.TopTower
         [SerializeField] private Button _findTenantButton;
 
         private int _floorIndex;
+        private int _cellIndex;
 
         private void Awake()
         {
@@ -36,9 +37,9 @@ namespace KS.TopTower
             if (_inst == this) _inst = null;
         }
 
-        public static void ShowFor(ModuleData data, string fallbackName, int floorIndex)
+        public static void ShowFor(ModuleData data, string fallbackName, int floorIndex, int cellIndex)
         {
-            if (_inst != null) _inst.Show(data, fallbackName, floorIndex);
+            if (_inst != null) _inst.Show(data, fallbackName, floorIndex, cellIndex);
         }
 
         public static void CloseIfOpen()
@@ -46,23 +47,25 @@ namespace KS.TopTower
             if (_inst != null) _inst.Close();
         }
 
-        private void Show(ModuleData data, string fallbackName, int floorIndex)
+        private void Show(ModuleData data, string fallbackName, int floorIndex, int cellIndex)
         {
             _floorIndex = floorIndex;
+            _cellIndex = cellIndex;
             if (_panel != null) _panel.SetActive(true);
 
             string title = (data != null && !string.IsNullOrEmpty(data.roomName)) ? data.roomName : fallbackName;
             if (_titleText != null) _titleText.text = title;
             if (_descText != null) _descText.text = data != null ? data.description : "";
-            long rent = data != null ? data.dailyRent : 0;
-            if (_rentText != null) _rentText.text = "일일 임대료: " + rent.ToString();
+            long income = data != null ? data.incomePerSecond : 0;
+            if (_rentText != null) _rentText.text = "수입: " + income.ToString() + " /초";
 
-            // 빈 방일 때만 '임차인 찾기' 표시 (입주완료/공사중이면 숨김)
+            // 빈 방(빌드 셀)일 때만 '임차인 찾기' 표시. 엘베 등(cell<0)은 표시 안 함.
             if (_findTenantButton != null)
             {
+                bool buildable = cellIndex >= 0;
                 var bm = BuildManager.Instance;
-                var slot = bm != null ? bm.GetSlot(floorIndex) : null;
-                bool isEmpty = slot == null || slot.status == BuildManager.SlotStatus.Empty;
+                var slot = (buildable && bm != null) ? bm.GetSlot(floorIndex, cellIndex) : null;
+                bool isEmpty = buildable && (slot == null || slot.status == BuildManager.SlotStatus.Empty);
                 _findTenantButton.gameObject.SetActive(isEmpty);
             }
         }
@@ -70,7 +73,7 @@ namespace KS.TopTower
         private void OnFindTenant()
         {
             Close();
-            TenantFinderPopup.Open(_floorIndex);
+            TenantFinderPopup.Open(_floorIndex, _cellIndex);
         }
 
         /// <summary>닫기 버튼 OnClick에 연결.</summary>

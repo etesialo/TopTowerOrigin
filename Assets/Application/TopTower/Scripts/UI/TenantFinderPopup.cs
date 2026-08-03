@@ -22,14 +22,15 @@ namespace KS.TopTower
         [SerializeField] private Button _confirmYes;
         [SerializeField] private Button _confirmNo;
 
-        private static readonly ModuleGroup[] Groups =
-            { ModuleGroup.Facility, ModuleGroup.Restaurant, ModuleGroup.Commercial, ModuleGroup.Office, ModuleGroup.Residence, ModuleGroup.Hotel };
-        private static readonly string[] GroupLabels =
-            { "시설", "식당", "상업", "사무", "주거", "호텔" };
+        // 지상 탭(업종). 지하는 시설 탭 하나만 동적으로.
+        private static readonly ModuleGroup[] AbovegroundGroups =
+            { ModuleGroup.Restaurant, ModuleGroup.Commercial, ModuleGroup.Office, ModuleGroup.Residence, ModuleGroup.Hotel };
+        private static readonly string[] AbovegroundLabels =
+            { "식당", "상업", "사무", "주거", "호텔" };
 
         private int _floorIndex;
+        private int _cellIndex;
         private ModuleData _pending;
-        private bool _tabsBuilt;
         private ModuleGroup _lastGroup = ModuleGroup.Restaurant;
 
         private static TMP_FontAsset Font { get { return TMP_Settings.defaultFontAsset; } }
@@ -41,7 +42,6 @@ namespace KS.TopTower
             if (_confirmPanel != null) _confirmPanel.SetActive(false);
             if (_confirmYes != null) _confirmYes.onClick.AddListener(OnYes);
             if (_confirmNo != null) _confirmNo.onClick.AddListener(OnNo);
-            EnsureTabs();
         }
 
         private void OnDestroy()
@@ -51,39 +51,65 @@ namespace KS.TopTower
             if (_inst == this) _inst = null;
         }
 
-        public static void Open(int floorIndex)
+        public static void Open(int floorIndex, int cellIndex)
         {
-            if (_inst != null) _inst.OpenInternal(floorIndex);
+            if (_inst != null) _inst.OpenInternal(floorIndex, cellIndex);
         }
 
-        private void OpenInternal(int floorIndex)
+        private void OpenInternal(int floorIndex, int cellIndex)
         {
             _floorIndex = floorIndex;
+            _cellIndex = cellIndex;
             if (_panel != null) _panel.SetActive(true);
             if (_confirmPanel != null) _confirmPanel.SetActive(false);
-            EnsureTabs();
-            ShowGroup(_lastGroup);   // 마지막으로 선택한 탭 유지
+            BuildForZone();
+        }
+
+        /// <summary>존/게이트에 맞춰 탭과 목록 구성. 지하=시설, 지상=업종(관리동 건설 후).</summary>
+        private void BuildForZone()
+        {
+            if (_tabBar != null)
+            {
+                EnsureHorizontalLayout(_tabBar);
+                for (int i = _tabBar.childCount - 1; i >= 0; i--) Destroy(_tabBar.GetChild(i).gameObject);
+            }
+            Zone zone = BuildManager.ZoneForFloor(_floorIndex);
+            bool mgmt = BuildManager.Instance != null && BuildManager.Instance.ManagementBuilt;
+
+            if (zone == Zone.Underground)
+            {
+                AddTab("시설", ModuleGroup.Facility);
+                ShowGroup(ModuleGroup.Facility);
+            }
+            else if (!mgmt)
+            {
+                if (_listContent != null)
+                {
+                    EnsureVerticalLayout(_listContent);
+                    for (int i = _listContent.childCount - 1; i >= 0; i--) Destroy(_listContent.GetChild(i).gameObject);
+                    CreateLabelRow(_listContent, "지하에 '관리동'을 먼저 지으세요.");
+                }
+            }
+            else
+            {
+                for (int i = 0; i < AbovegroundGroups.Length; i++) AddTab(AbovegroundLabels[i], AbovegroundGroups[i]);
+                ShowGroup(ModuleGroup.Restaurant);
+            }
+        }
+
+        private void AddTab(string label, ModuleGroup g)
+        {
+            if (_tabBar == null) return;
+            var btn = CreateButton(_tabBar, label, 0, 60, new Color(0.28f, 0.30f, 0.45f));
+            btn.onClick.AddListener(delegate { ShowGroup(g); });
+            var le = btn.gameObject.AddComponent<LayoutElement>();
+            le.flexibleWidth = 1;
         }
 
         public void Close()   // X 버튼
         {
             if (_confirmPanel != null) _confirmPanel.SetActive(false);
             if (_panel != null) _panel.SetActive(false);
-        }
-
-        private void EnsureTabs()
-        {
-            if (_tabsBuilt || _tabBar == null) return;
-            EnsureHorizontalLayout(_tabBar);
-            for (int i = 0; i < Groups.Length; i++)
-            {
-                ModuleGroup g = Groups[i];
-                var btn = CreateButton(_tabBar, GroupLabels[i], 0, 60, new Color(0.28f, 0.30f, 0.45f));
-                btn.onClick.AddListener(delegate { ShowGroup(g); });
-                var le = btn.gameObject.AddComponent<LayoutElement>();
-                le.flexibleWidth = 1;
-            }
-            _tabsBuilt = true;
         }
 
         private void ShowGroup(ModuleGroup g)
@@ -94,16 +120,25 @@ namespace KS.TopTower
             for (int i = _listContent.childCount - 1; i >= 0; i--)
                 Destroy(_listContent.GetChild(i).gameObject);
 
-            var mods = ModuleDatabase.GetByGroup(g);
+            // 존/게이트 필터: 이 층 존에 허용된 모듈만, 관리동 건설 전엔 관리동만.
+            Zone zone = BuildManager.ZoneForFloor(_floorIndex);
+            bool mgmt = BuildManager.Instance != null && BuildManager.Instance.ManagementBuilt;
+            var mods = new System.Collections.Generic.List<ModuleData>();
+            foreach (var m in ModuleDatabase.GetByGroup(g))
+            {
+                if (m.allowedZones != null && m.allowedZones.Count > 0 && !m.allowedZones.Contains(zone)) continue;
+                if (!mgmt && !BuildManager.IsManagementCore(m)) continue;
+                mods.Add(m);
+            }
             if (mods.Count == 0)
             {
-                CreateLabelRow(_listContent, "(이 그룹에 등록된 모듈이 없습니다)");
+                CreateLabelRow(_listContent, "(지을 수 있는 모듈이 없습니다)");
                 return;
             }
             foreach (var m in mods)
             {
                 string name = string.IsNullOrEmpty(m.roomName) ? m.moduleName : m.roomName;
-                string label = name + "    공사 " + m.buildCost + " / 임대 " + m.dailyRent;
+                string label = name + "    공사 " + m.buildCost + " / 수입 " + m.incomePerSecond + "/초";
                 ModuleData captured = m;
                 var btn = CreateButton(_listContent, label, 0, 84, new Color(0.20f, 0.22f, 0.34f));
                 var le = btn.gameObject.AddComponent<LayoutElement>();
@@ -117,14 +152,14 @@ namespace KS.TopTower
             _pending = m;
             string name = string.IsNullOrEmpty(m.roomName) ? m.moduleName : m.roomName;
             if (_confirmText != null)
-                _confirmText.text = name + " 을(를) 짓겠습니까?\n공사비 " + m.buildCost + " / 일일 임대 " + m.dailyRent;
+                _confirmText.text = name + " 을(를) 짓겠습니까?\n공사비 " + m.buildCost + " / 수입 " + m.incomePerSecond + "/초";
             if (_confirmPanel != null) _confirmPanel.SetActive(true);
         }
 
         private void OnYes()
         {
             if (_pending == null) return;
-            bool ok = BuildManager.Instance != null && BuildManager.Instance.StartBuild(_floorIndex, _pending);
+            bool ok = BuildManager.Instance != null && BuildManager.Instance.StartBuild(_floorIndex, _cellIndex, _pending);
             if (ok)
             {
                 _pending = null;

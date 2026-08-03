@@ -16,13 +16,13 @@ MonoBehaviour:
   moduleName: Omakase
   cube: 0
   frame: 2
-  allowedZones: 0100000000000000
+  allowedZones: 01000000
   extend: 0
   clickable: 1
   roomName: "\uACE0\uAE09 \uC624\uB9C8\uCE74\uC138"
   description: "\uC7A5\uC778\uC774 \uCF54\uC2A4\uB85C \uC120\uBCF4\uC774\uB294 \uACE0\uAE09
     \uC624\uB9C8\uCE74\uC138."
-  dailyRent: 5
+  incomePerSecond: 5
   buildCost: 10
   buildSeconds: 3
   sprite: {fileID: 21300000, guid: 579869561e93a0647848c5c8261529a3, type: 3}
