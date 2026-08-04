@@ -69,7 +69,7 @@ namespace KS.TopTower
         //  - 전용: Stage_{NNN}_{Type}_{ID}          예: Stage_001_Wall_001
         // Empty는 그룹 접두어(Structural→Facility 등)가 바뀌어도 잡히도록 _{Type}_ 키워드 매칭.
         private const string EmptyNameKeyword = "_Empty_";
-        private const string ConstructionNameKeyword = "_Consinterior_";   // 공사중 실내 스프라이트 (StageCommon 공통)
+        private const string ConstructionNameKeyword = "Consinterior";   // 공사중 실내 스프라이트 (2slot/4slot 포함 매칭)
 
         // Indoor ceiling sprite 없을 때 fallback 색 (진파랑)
         private static readonly Color CeilingFallbackColor = new Color(0.1f, 0.15f, 0.4f);
@@ -766,7 +766,7 @@ namespace KS.TopTower
             _cachedEmpties = basicEmpties;
             _moduleGeo.Clear();
 
-            _moduleGeo.Clear();
+            var floorsPlaced = new List<int>();
             for (int floorIdx = 0; floorIdx < sortedFloors.Count; floorIdx++)
             {
                 var floor = sortedFloors[floorIdx];
@@ -794,23 +794,52 @@ namespace KS.TopTower
                     _moduleGeo[(fi, cell)] = new Vector4(cx, y, cwidth, cubeHeight);
                     PlaceCellModule(fi, cell, cx, y, cwidth, cubeHeight);
                 }
+                floorsPlaced.Add(fi);
+            }
+            // 셀 상태 기반 구분벽 갱신 (양옆 모두 점유일 때만)
+            foreach (var fi in floorsPlaced) RefreshFloorDividers(fi);
+        }
 
-                // 셀 사이 검은 구분벽 (엘베 옆 벽처럼). 셀이 2개 이상일 때 경계마다.
-                if (cellCount > 1)
+        private const float CellDividerWidthRatio = 0.03f;   // 구분벽 폭 = 큐브폭 × 이 값 (얇게)
+
+        private static bool IsCellOccupied(BuildManager bm, int floor, int cell)
+        {
+            if (bm == null) return false;
+            var s = bm.GetSlot(floor, cell);
+            return s != null && s.status != BuildManager.SlotStatus.Empty;
+        }
+
+        /// <summary>해당 층 구분벽 재구성: 양옆 셀이 모두 채워진(공사중/입주) 경계에만 얇은 검은벽. 빈방이면 없음.</summary>
+        private void RefreshFloorDividers(int floor)
+        {
+            if (_cubeContainer == null) return;
+
+            // 기존 구분벽 제거
+            string prefix = "CellDivider_F" + floor + "_";
+            for (int i = _cubeContainer.childCount - 1; i >= 0; i--)
+            {
+                var ch = _cubeContainer.GetChild(i);
+                if (ch.name.StartsWith(prefix))
                 {
-                    float dw = Mathf.Max(4f, cubeWidth * CellDividerWidthRatio);
-                    for (int b = 1; b < cellCount; b++)
-                    {
-                        float bx = (moduleStartCol + b * cellCubes) * cubeWidth;
-                        CreateCellDivider(fi, b, bx - dw * 0.5f, y, dw, cubeHeight);
-                    }
+                    if (Application.isPlaying) Destroy(ch.gameObject); else DestroyImmediate(ch.gameObject);
                 }
+            }
+
+            int cells = BuildManager.CellCountForFloor(floor);
+            if (cells < 2) return;
+            var bm = BuildManager.Instance;
+            float cubeW = _cubeContainer.rect.width / _gridWidth;
+            float dw = Mathf.Max(2f, cubeW * CellDividerWidthRatio);
+
+            for (int b = 1; b < cells; b++)
+            {
+                if (!IsCellOccupied(bm, floor, b - 1) || !IsCellOccupied(bm, floor, b)) continue; // 한쪽이라도 빈방이면 X
+                if (!_moduleGeo.TryGetValue((floor, b), out var geo)) continue;                    // geo.x=셀 좌측=경계
+                CreateCellDivider(floor, b, geo.x - dw * 0.5f, geo.y, dw, geo.w);
             }
         }
 
-        private const float CellDividerWidthRatio = 0.08f;   // 구분벽 폭 = 큐브폭 × 이 값
-
-        /// <summary>셀 사이 검은 세로 구분벽 1개 생성 (정적 — RefreshCell에서 앞으로 재정렬).</summary>
+        /// <summary>셀 사이 검은 세로 구분벽 1개 생성.</summary>
         private void CreateCellDivider(int fi, int idx, float x, float y, float width, float height)
         {
             var go = new GameObject("CellDivider_F" + fi + "_" + idx, typeof(RectTransform), typeof(UnityEngine.UI.Image));
@@ -821,18 +850,6 @@ namespace KS.TopTower
             rt.anchoredPosition = new Vector2(x, y); rt.sizeDelta = new Vector2(width, height);
             var img = go.GetComponent<UnityEngine.UI.Image>();
             img.color = Color.black; img.raycastTarget = false;
-        }
-
-        /// <summary>해당 층의 구분벽들을 맨 앞으로 (셀 모듈 위에 보이도록).</summary>
-        private void FrontDividers(int floorIndex)
-        {
-            if (_cubeContainer == null) return;
-            string prefix = "CellDivider_F" + floorIndex + "_";
-            for (int i = 0; i < _cubeContainer.childCount; i++)
-            {
-                var ch = _cubeContainer.GetChild(i);
-                if (ch.name.StartsWith(prefix)) ch.SetAsLastSibling();
-            }
         }
 
         // 셀 지오메트리((floor,cell)→x,y,w,h) + 빈방/공사 스프라이트 캐시 (RefreshCell 재사용용)
@@ -891,7 +908,7 @@ namespace KS.TopTower
                 }
             }
             PlaceCellModule(floorIndex, cell, g.x, g.y, g.z, g.w);
-            FrontDividers(floorIndex);   // 구분벽이 새 모듈 위에 보이도록
+            RefreshFloorDividers(floorIndex);   // 셀 상태 변화 → 구분벽 재구성(모듈 위에 표시)
         }
 
         /// <summary>해당 층의 모든 셀 갱신.</summary>
@@ -913,8 +930,8 @@ namespace KS.TopTower
             var img = go.GetComponent<UnityEngine.UI.Image>();
             img.raycastTarget = false;
             img.color = Color.white;
-            if (_cachedConstruction != null && _cachedConstruction.Count > 0)
-                img.sprite = _cachedConstruction[Random.Range(0, _cachedConstruction.Count)];   // 공사중 실내 이미지 (없으면 흰 네모)
+            var conSprite = PickConstructionSprite(width);   // 셀 슬롯폭(2/4)에 맞는 공사 이미지
+            if (conSprite != null) img.sprite = conSprite;
 
             var txtGo = new GameObject("Countdown", typeof(RectTransform), typeof(TMPro.TextMeshProUGUI));
             if (!Application.isPlaying) txtGo.hideFlags = HideFlags.HideAndDontSave;
@@ -928,6 +945,19 @@ namespace KS.TopTower
 
             var cd = go.AddComponent<ConstructionCountdown>();
             cd.Init(floorIndex, cell, tmp);
+        }
+
+        /// <summary>셀 슬롯폭(2/4)에 맞는 공사 스프라이트 선택. 이름에 "2slot"/"4slot" 매칭. 없으면 아무거나/ null.</summary>
+        private Sprite PickConstructionSprite(float cellWidthPx)
+        {
+            if (_cachedConstruction == null || _cachedConstruction.Count == 0) return null;
+            float cubeW = _cubeContainer != null ? _cubeContainer.rect.width / _gridWidth : cellWidthPx;
+            int slots = Mathf.Max(1, Mathf.RoundToInt(cellWidthPx / cubeW));
+            string tag = slots + "slot";   // "2slot" / "4slot"
+
+            var matched = _cachedConstruction.Where(s => s.name.Contains(tag)).ToList();
+            var pool = matched.Count > 0 ? matched : _cachedConstruction;
+            return pool[Random.Range(0, pool.Count)];
         }
 
         /// <summary>
